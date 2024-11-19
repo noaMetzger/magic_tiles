@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Magic Tiles</title>
+
+</head>
+<body>
+ 
+
+    <div id="gameContainer" >
+        <div id="stars">
+            <img id="star1"  class="star" src="images/star-2402083_1280.png">
+            <img id="star2" class="star"  src="images/star-2402083_1280.png">
+            <img id="star3" class="star"  src="images/star-2402083_1280.png">
+        </div>
+    <video id="backgroundVideo" autoplay loop muted >
+        <source src="images/gifbackGroundREgular.mp4" type="video/mp4">
+    </video>
+    
+    <canvas id="gameCanvas"> </canvas>
+
+    </div>
+
+</body>
+
+<script>
+  const canvas = document.getElementById('gameCanvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width = canvas.offsetWidth;
+  canvas.height = canvas.offsetHeight;
+
+  let vw = window.innerWidth / 100;
+  let vh = window.innerHeight / 100;
+  let tileWidth = 7 * vw;
+  let tileHeight = 27 * vh; 
+  const tiles = [];
+  let score = 0;
+  let gameOver = false;
+  let speed;
+  let audio;
+  let newTile
+
+  if( sessionStorage.getItem('chosenSpeed')==1)
+{
+    newTile= setInterval(createTile, 1000) ;//קל יותר למהירות 4
+    speed =4 //קל יותר  4;
+    audio = new Audio('sounds/level1.mp3');
+
+}
+else{
+   newTile=setInterval(createTile, 500);//קשה יותר למהירות 8*/
+       speed =8;// קשה יותר   
+        audio = new Audio('sounds/level2.mp3');
+}
+
+
+window.onload = function() {
+    // בדיקה אם המפתח 'initialized' כבר קיים
+    if (!localStorage.getItem('initialized')) {
+        // אתחול הערך של score ל-0
+        localStorage.setItem('maxScore1', '0');
+        localStorage.setItem('maxScore2', '0');
+        // סימון שהאתחול בוצע
+        localStorage.setItem('initialized', 'true');
+    }
+};
+
+
+
+
+  function createTile() {
+    const x = Math.floor(Math.random() * 4) * tileWidth;
+    const y=-tileHeight;
+    tiles.push({ x, y});
+}
+
+function updateTiles() {
+    for (let i = 0; i < tiles.length; i++) {
+        tiles[i].y += speed;
+        if (tiles[i].y > canvas.height) {
+            tiles.splice(i, 1);
+            gameOver = true;
+        }
+    }
+}
+
+
+
+
+function drawTiles() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    for (const tile of tiles) {
+        ctx.fillStyle = '#000';
+        ctx.fillRect(tile.x, tile.y, tileWidth, tileHeight);
+        ctx.strokeStyle = '#fff'; // צבע הגבול
+        ctx.lineWidth = 1; // רוחב הגבול
+        ctx.strokeRect(tile.x, tile.y, tileWidth,tileHeight ); // ציור הגבול סביב האריח
+    }
+}
+
+
+let playTimeout;
+const playDuration = 1500; // זמן במילישניות (1.5 שניות)
+const failSound = new Audio('sounds/fail.mp3');
+
+
+
+
+document.addEventListener('keydown', (e) => {
+    if (gameOver) return;
+    const key = e.key.toLowerCase();
+    const column = ['a', 's', 'd', 'f'].indexOf(key);
+    if (column !== -1) 
+    {
+
+            if (tiles[0].x === column * tileWidth) 
+            {
+                tiles.splice(0, 1);
+                score++;
+                audio.play(); // הפעלת השמע
+                // איפוס הטיימר
+                clearTimeout(playTimeout);
+                playTimeout = setTimeout(() => {
+                    audio.pause();
+                }, playDuration);   
+            }
+            else
+            {
+                ctx.fillStyle = '#ff0000';
+                ctx.fillRect(column * tileWidth, tiles[0].y, tileWidth, tileHeight);
+                gameOver=true;
+                fail();
+            }
+        
+    }
+});
+
+function fail(){
+        audio.pause(); // עצירת השמע
+        audio.currentTime = 0; // איפוס השמע להתחלה
+        failSound.play(); // הפעלת צליל הפסילה
+        // שמירת ערך ב-Session Storage
+        sessionStorage.setItem('currentScore', score);
+        setTimeout(playGameOver, 1000); 
+        setTimeout(nextPage, 2500);//עובר לדף הבא שמוצג בו התוצאה
+
+        if(speed==4 && score > localStorage.getItem('maxScore1'))
+        {
+            localStorage.setItem('maxScore1', score);         
+        }
+        if(speed==8 && score > localStorage.getItem('maxScore2'))
+        {
+            localStorage.setItem('maxScore2', score);         
+        }
+
+
+}
+
+
+
+function gameLoop() {
+    if (!gameOver) {
+        updateTiles();
+        drawTiles();
+    if(score==20)
+    {
+      document.getElementById('star1').src="images/star-5786426_1280.png";
+    }
+    if(score==50)
+    {
+      document.getElementById('star2').src="images/star-5786426_1280.png";
+    }
+    if(score==100)
+    {
+      document.getElementById('star3').src="images/star-5786426_1280.png";
+    }
+
+        requestAnimationFrame(gameLoop);
+    } else {
+        fail();
+    }
+}
+
+function nextPage() {
+    // קוד שמזהה שהשחקן נפסל
+    window.location.href = "gameOver.html"; // הפניה לדף אחר
+}
+
+let gOver=new Audio('sounds/game-over.mp3');
+
+function playGameOver()
+{
+    gOver.play();
+}
+
+gameLoop();
+
+  </script>
+</html>
+

@@ -1,0 +1,214 @@
+body {
+    margin: 0;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #000;
+
+}
+
+
+#gameContainer {
+    position: relative;
+    width: 28vw; /* ניתן לשנות את הגודל לפי הצורך */
+    height: 80vh; /* ניתן לשנות את הגודל לפי הצורך */
+}
+
+#backgroundVideo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+#gameCanvas {
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    border: 1px solid #ffffff;
+}
+
+.star{
+    height: 8vh;
+    width: 8vh;
+    z-index: 2;
+}
+
+#stars{
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    width: 20vw;
+    padding-right:4vw;
+    padding-left: 4vw;
+}
+
+.gBtnContainer
+{
+    position: absolute;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    bottom:5vh ;
+    width: 100%;
+    z-index: 3;
+}
+
+.button img {
+    height: 10vh;
+    width: 6vw;
+    margin: 2vw;
+    border: 1px solid rgb(81, 68, 68);
+    border-radius: 30px;
+   cursor: pointer;
+   z-index: 4;
+   pointer-events: auto;
+
+}
+#levels{
+   position: absolute;
+   display: flex;
+   flex-direction: column;
+   text-align: center;
+   justify-content: center;
+   align-items: center;
+   height:40% ; 
+   width: 100%;
+   bottom: 5%;
+   z-index: 4;
+
+}
+#level1{
+    position: relative;
+    height: 40%;
+    width: 80%; 
+    margin-top: 5%;
+    border-radius: 40px;
+    border: 1px solid #ffffff;
+    z-index: 5;
+}
+
+#level2{
+    position: relative;
+    height: 40%;
+    width: 80%;
+    margin-top: 5%;
+    border-radius: 40px;
+    border: 1px solid #ffffff;
+    z-index: 5;
+}
+
+
+.gifSong{
+    position: absolute;
+    height: 100%;
+    width: 40%;
+    left: 2%; 
+    z-index: 6;
+}
+.btnSongs{
+    position: absolute;
+    top:5%;
+    height: 90%;
+    width: 40%;
+    right: 2%; 
+    z-index: 6;
+    border-radius: 40px;
+    border: 1px solid #ffffff;
+    cursor: pointer;
+    pointer-events: auto;
+    background-color:transparent;
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+    font-size:x-large;
+    text-shadow: 
+    -1px -1px 0 #ffffff,  
+     1px -1px 0 #ffffff,
+    -1px  1px 0 #ffffff,
+     1px  1px 0 #ffffff; /* הוספת גבול לבן לאותיות */
+}
+
+
+#instruction
+{
+    height: 50vh;
+    padding: 20px;
+    list-style-type: none;
+    direction: rtl;
+    text-align: center;
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+
+}
+
+#instruction li {
+    text-shadow: 
+        -1px -1px 0 #000,  
+         1px -1px 0 #000,
+        -1px  1px 0 #000,
+         1px  1px 0 #000; /* הוספת גבול שחור לאותיות */
+}
+h2{
+    text-align: center;
+    padding-top:15vh;
+    color: rgb(255, 255, 255);
+    text-shadow: 
+    -1px -1px 0 #000,  
+     1px -1px 0 #000,
+    -1px  1px 0 #000,
+     1px  1px 0 #000; /* הוספת גבול שחור לאותיות */
+}
+
+#imgTrophy{
+    position: absolute;
+    height:100%;
+    width: 80%;
+   
+}
+
+#divImg{
+    position: absolute;
+    height: 40vh;  
+    width: 28vw; 
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    top:5%;
+}
+
+
+#p1,#p2{
+    color: #ffffff;
+    text-shadow: 
+    -1px -1px 0 #000,  
+     1px -1px 0 #000,
+    -1px  1px 0 #000,
+     1px  1px 0 #000; /* הוספת גבול שחור לאותיות */
+     font-size: large;
+}
+
+#btnHome{
+
+}
+
+#imgHome{
+    position: absolute;
+    width: 12%;
+    height: 8%;
+    z-index: 3;
+    padding: 10px;
+}
+

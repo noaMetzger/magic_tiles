@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Magic Tiles</title>
+</head>
+<body>
+    <div  id="gameContainer" > 
+        <h2 id="h2">YOUR SCORE IS</h2>
+         <div class="gBtnContainer">
+          <a  href="songs.html" class="button"><img  class="gOverBtn" src="images/Purple_and_Pink_Futuristic_Music_Studio_Logo_-removebg-preview2121212.png" alt="play again"></a>
+          <a href="homwPage.html" class="button"><img class="gOverBtn" src="images/icon-1976100_1280.png" alt="Home"></a>
+        </div>  
+        <video id="backgroundVideo" autoplay loop muted >
+            <source src="images/gifGameOver.mp4" type="video/mp4">
+        </video>
+        <canvas id="gameCanvas"> </canvas>
+
+    </div>
+
+
+</body>
+<script>
+  const canvas = document.getElementById('gameCanvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width = canvas.offsetWidth;
+  canvas.height = canvas.offsetHeight;
+
+  let vw = window.innerWidth / 100;
+  let vh = window.innerHeight / 100;
+
+
+
+  // קריאת ערך מ-Session Storage
+ let score= sessionStorage.getItem('currentScore');
+ document.getElementById("h2").innerHTML+=" "+score;
+
+let x=localStorage.getItem('maxScore1');
+console.log(x);
+let f=localStorage.getItem('maxScore2');
+console.log(f);
+</script>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Magic Tiles</title>
+</head>
+<body>
+    <div  id="gameContainer"> 
+        <ul id="instruction">
+            <li>הוראות למשחק Magic Tiles עם שתי רמות:</li>
+            <li>2. **התחלת המשחק**: בחר את הרמה הרצויה על ידי לחיצה על אחד משני הכפתורים:</li>
+            <li>   - **רמה קלה**: לחץ על הכפתור "LEVEL 1" כדי להתחיל ברמה קלה.</li>
+            <li>   - **רמה קשה**: לחץ על הכפתור "LEVEL2" כדי להתחיל ברמה קשה.</li>
+            <li>3. **שימוש במקשים**: השתמש באותיות האנגליות A, S, D ו-F כדי ללחוץ על האריחים השחורים בזמן הנכון.</li>
+            <li>4. **מטרת המשחק**: המטרה היא ללחוץ על האריחים השחורים לפי הסדר.</li>
+            <li>5. **סיום המשחק**: המשחק מסתיים כאשר אתה מפספס אריח שחור או לוחץ על אריח שגוי.</li>
+            <li>בהצלחה במשחק! 🎹</li>
+        </ul>
+            
+            
+        <div id="levels"> 
+            <div id="level1">
+                <img class="gifSong" src="images/gifSong.gif" alt="GIF Song">
+                <button id="btn1" class="btnSongs">LEVEL 1</button>
+            </div>
+            <div id="level2">
+                <img class="gifSong" src="images/gifSong.gif" alt="GIF Song">
+                <button  id="btn2" class="btnSongs">LEVEL 2</button>
+            </div>
+         </div>
+       <video id="backgroundVideo" autoplay loop muted >
+           <source src="images/gifEmpty.mp4" type="video/mp4">
+       </video>
+       <canvas id="gameCanvas"> </canvas>
+   </div>
+
+</body>
+<script>
+     document.querySelector("#btn1").addEventListener("click" ,nextPage);
+     document.querySelector("#btn2").addEventListener("click" ,nextPage);
+
+     function nextPage(){
+        let x=event.target.id.slice(3);
+        console.log(x);
+        sessionStorage.setItem('chosenSpeed',x);
+        window.location.href = "game.html"; // הפניה לדף אחר
+     }
+</script>
+</html>
